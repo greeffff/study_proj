@@ -1,0 +1,76 @@
+
+   Error 
+
+  Class 'Aws\Sqs\SqsClient' not found
+
+  at /var/www/study_project/vendor/laravel/framework/src/Illuminate/Queue/Connectors/SqsConnector.php:26
+    22|             $config['credentials'] = Arr::only($config, ['key', 'secret', 'token']);
+    23|         }
+    24| 
+    25|         return new SqsQueue(
+  > 26|             new SqsClient($config), $config['queue'], $config['prefix'] ?? '', $config['suffix'] ?? ''
+    27|         );
+    28|     }
+    29| 
+    30|     /**
+
+      [2m+19 vendor frames [22m
+  20  /var/www/study_project/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+
+   Error 
+
+  Class 'Aws\Sqs\SqsClient' not found
+
+  at /var/www/study_project/vendor/laravel/framework/src/Illuminate/Queue/Connectors/SqsConnector.php:26
+    22|             $config['credentials'] = Arr::only($config, ['key', 'secret', 'token']);
+    23|         }
+    24| 
+    25|         return new SqsQueue(
+  > 26|             new SqsClient($config), $config['queue'], $config['prefix'] ?? '', $config['suffix'] ?? ''
+    27|         );
+    28|     }
+    29| 
+    30|     /**
+
+      [2m+19 vendor frames [22m
+  20  /var/www/study_project/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+
+   Error 
+
+  Class 'Aws\Sqs\SqsClient' not found
+
+  at /var/www/study_project/vendor/laravel/framework/src/Illuminate/Queue/Connectors/SqsConnector.php:26
+    22|             $config['credentials'] = Arr::only($config, ['key', 'secret', 'token']);
+    23|         }
+    24| 
+    25|         return new SqsQueue(
+  > 26|             new SqsClient($config), $config['queue'], $config['prefix'] ?? '', $config['suffix'] ?? ''
+    27|         );
+    28|     }
+    29| 
+    30|     /**
+
+      [2m+19 vendor frames [22m
+  20  /var/www/study_project/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+
+   Error 
+
+  Class 'Aws\Sqs\SqsClient' not found
+
+  at /var/www/study_project/vendor/laravel/framework/src/Illuminate/Queue/Connectors/SqsConnector.php:26
+    22|             $config['credentials'] = Arr::only($config, ['key', 'secret', 'token']);
+    23|         }
+    24| 
+    25|         return new SqsQueue(
+  > 26|             new SqsClient($config), $config['queue'], $config['prefix'] ?? '', $config['suffix'] ?? ''
+    27|         );
+    28|     }
+    29| 
+    30|     /**
+
+      [2m+19 vendor frames [22m
+  20  /var/www/study_project/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
