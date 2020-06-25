@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewMessage;
 use App\Events\RealTimeChartEvent;
 use App\User;
 use Illuminate\Http\Request;
@@ -73,5 +74,12 @@ class VueController extends Controller
             }
         }
         return $result;
+    }
+    public function chatIndex(){
+        return view('vue.chat');
+    }
+    public function chatMessage(Request $request){
+//        dd($request);
+        event(new NewMessage($request->login, $request->message));
     }
 }

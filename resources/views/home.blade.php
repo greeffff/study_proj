@@ -49,6 +49,7 @@
                                 <a class="btn btn-primary custom-btn" href="{{route('vue.sendDataAjaxIndex')}}">Получение данных через Ajax</a>
                                 <a class="btn btn-primary custom-btn" href="{{route('vue.chartAjaxIndex')}}">ChartJs через Ajax</a>
                                 <a class="btn btn-primary custom-btn" href="{{route('vue.chartSocketIndex')}}">Realtime ChartJsx</a>
+                                <a class="btn btn-primary custom-btn" href="{{route('vue.allChatIndex')}}">Чат для всех</a>
                             </div>
                         </div>
                     </div>

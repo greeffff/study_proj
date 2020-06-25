@@ -25,6 +25,8 @@ Vue.component('data-send', require('./components/dataComponent.vue').default);
 Vue.component('request-data', require('./components/RequestData.vue').default);
 Vue.component('ajax-chart', require('./components/LineChart.vue').default);
 Vue.component('realtime-chart', require('./components/chartRealtime.vue').default);
+Vue.component('chat', require('./components/chat.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
