@@ -26,6 +26,14 @@ Vue.component('request-data', require('./components/RequestData.vue').default);
 Vue.component('ajax-chart', require('./components/LineChart.vue').default);
 Vue.component('realtime-chart', require('./components/chartRealtime.vue').default);
 Vue.component('chat', require('./components/chat.vue').default);
+Vue.component('country-filter', require('./components/filterCountries.vue').default);
+Vue.component('private-chat', require('./components/privateChat.vue').default);
+Vue.component('chat-echo', require('./components/chatEcho.vue').default);
+Vue.component('private-echo', require('./components/privateEchoChat.vue').default);
+Vue.component('private-echo-room', require('./components/privateRoomChat.vue').default);
+Vue.component('we-code-message', require('./components/weCodeChat/weCodeMessager.vue').default);
+
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

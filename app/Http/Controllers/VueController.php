@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageEcho;
 use App\Events\NewMessage;
+use App\Events\PrivateChat;
+use App\Events\PrivateEchoChat;
 use App\Events\RealTimeChartEvent;
+use App\Room;
 use App\User;
 use Illuminate\Http\Request;
 use Auth;
@@ -79,7 +83,34 @@ class VueController extends Controller
         return view('vue.chat');
     }
     public function chatMessage(Request $request){
-//        dd($request);
         event(new NewMessage($request->login, $request->message));
+    }
+    public function privateChat(){
+        return view('vue.privateChat');
+    }
+    public function getUsers(){
+        return User::all();
+    }
+    public function privateChatMessage(Request $request){
+        PrivateChat::dispatch($request->all());
+        return $request->all();
+    }
+    public function chatEcho(){
+        return view('vue.chatEcho');
+    }
+    public function chatEchoSend(Request $request){
+        MessageEcho::dispatcH($request->input('message'));
+//        event(new MessageEcho($request->input('message')));
+    }
+
+
+    public function privateEchoChat(){
+        return view('vue.privateEchoChat');
+    }
+    public function privateEchoSend(Request $request){
+        event(new PrivateEchoChat($request->all()));
+    }
+    public function room(Room $room){
+        return view('vue.room',['room'=>$room]);
     }
 }

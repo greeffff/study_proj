@@ -39,4 +39,23 @@ Route::group(['prefix'=>'vue','as'=>'vue.',],function () {
     Route::get('chat','VueController@chatIndex')->name('allChatIndex');
     Route::get('chat/sendMessage','VueController@chatMessage')->name('chatMessage');
 
+    Route::get('privateChat','VueController@privateChat')->name('privateChat');
+    Route::get('privateChatSend','VueController@privateChatMessage')->name('privateChatMessage');
+
+    Route::get('chatEcho','VueController@chatEcho')->name('chatEcho');
+    Route::post('chatEcho-send','VueController@chatEchoSend')->name('chatEchoSend');
+
+    Route::get('privateEchoChat','VueController@privateEchoChat')->name('privateEchoChat');
+    Route::post('privateEcho-send','VueController@privateEchoSend')->name('privateEchoSend');
+    Route::get('privateEchoChat/rooms/{room}','VueController@room')->name('private-room');
+});
+Route::group(['prefix'=>'chat','as'=>'chat.'],function (){
+    Route::get('/','ChatController@index')->name('index');
+});
+
+Route::get('/users','VueController@getUsers')->name('users');
+
+Route::group(['prefix' => 'filter','as'=>'filter.'], function () {
+    Route::get('abstruct_filter','FilterController@index')->name('abstruct_filter');
+    Route::post('abstruct_filter','FilterController@filter')->name('filter');
 });
