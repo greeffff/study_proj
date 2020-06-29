@@ -25,7 +25,17 @@
         },
         methods:{
           sendMessage(text){
-            console.log(text);
+              if(this.contact == null){
+                  alert('Choose contact');
+                  return 0;
+              }
+              console.log(this.contact);
+            axios.post('/chat/send',{
+                contact_id : this.contact.id,
+                text : text
+            }).then(response =>{
+                this.$emit('pushMes',response.data);
+            });
           },
         },
         components:{
@@ -34,3 +44,17 @@
         }
     }
 </script>
+<style lang="scss" scoped>
+    .chat-window {
+        flex: 5;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        h1 {
+            font-size: 20px;
+            padding: 10px;
+            margin: 0;
+            border-bottom: 1px dashed lightgray;
+        }
+    }
+</style>

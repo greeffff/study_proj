@@ -1,7 +1,7 @@
 <template>
     <div class="chat-app">
-        <chatWindow :contact="selectContact" :messages="messages"></chatWindow>
-        <contactList :contacts="contacts"></contactList>
+        <contactList :contacts="contacts" @selected="startChatContact"></contactList>
+        <chatWindow :contact="selectContact" :messages="messages" @pushMes="pushNewMessage"></chatWindow>
     </div>
 </template>
 
@@ -28,9 +28,26 @@
                console.log(this.contacts);
             });
         },
+        methods:{
+            pushNewMessage(text) {
+                console.log(text);
+                this.messages.push(text);
+            },
+            startChatContact:function (contact) {
+                axios.get(`/chat/messages/${contact.id}`).then(response =>{
+                    this.messages = response.data;
+                    this.selectContact = contact;
+                });
+            },
+        },
         components:{
             contactList,
             chatWindow
         }
     }
 </script>
+<style lang="scss" scoped>
+    .chat-app {
+        display: flex;
+    }
+</style>
