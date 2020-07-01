@@ -2965,7 +2965,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       setTimeout(function () {
-        _this.$refs.feed.scrollTop = _this.$refs.feed.$el.scrollHeight - _this.$refs.feed.clientHeight;
+        _this.$refs.feed.scrollTop = _this.$refs.feed.scrollHeight - _this.$refs.feed.clientHeight;
       }, 50);
     }
   },
@@ -3028,12 +3028,11 @@ __webpack_require__.r(__webpack_exports__);
         return 0;
       }
 
-      console.log(this.contact);
       axios.post('/chat/send', {
         contact_id: this.contact.id,
         text: text
       }).then(function (response) {
-        _this.$emit('pushMes', response.data);
+        _this.$emit('pushMes', response);
       });
     }
   },
@@ -3070,6 +3069,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['contacts'],
   mounted: function mounted() {
@@ -3086,6 +3086,13 @@ __webpack_require__.r(__webpack_exports__);
       console.log(contact);
       this.selected = index;
       this.$emit('selected', contact);
+    }
+  },
+  computed: {
+    sortedContact: function sortedContact() {
+      return _.sortBy(this.contacts, [function (contact) {
+        return contact.unread;
+      }]).reverse();
     }
   }
 });
@@ -3123,28 +3130,67 @@ __webpack_require__.r(__webpack_exports__);
     return {
       messages: [],
       contacts: [],
-      selectContact: null
+      selectContact: null,
+      typingTimer: false
     };
+  },
+  computed: {
+    channel: function channel() {
+      return window.Echo["private"]('channel-chat.' + this.user.id);
+    }
   },
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/users').then(function (response) {
+    axios.get('/chat/contacts').then(function (response) {
       _this.contacts = response.data;
-      console.log(_this.contacts);
+    });
+    this.channel.listen('EventMessager', function (_ref) {
+      var body = _ref.body;
+
+      _this.handleIncoming(body); // this.messages.push(body);
+      // this.isActive = false;
+
+    }).listenForWhisper('typing', function (e) {
+      // this.isActive = e;
+      if (_this.typingTimer) clearTimeout(_this.typingTimer);
+      _this.typingTimer = setTimeout(function () {// this.isActive = false;
+      }, 2000);
     });
   },
   methods: {
     pushNewMessage: function pushNewMessage(text) {
-      console.log(text);
       this.messages.push(text);
     },
     startChatContact: function startChatContact(contact) {
       var _this2 = this;
 
+      this.updateUnreadCount(contact, true);
       axios.get("/chat/messages/".concat(contact.id)).then(function (response) {
         _this2.messages = response.data;
         _this2.selectContact = contact;
+      });
+    },
+    handleIncoming: function handleIncoming(message) {
+      if (this.selectContact && message.from === this.selectContact.id) {
+        this.pushNewMessage(message.text);
+      }
+
+      this.updateUnreadCount(message, false);
+    },
+    updateUnreadCount: function updateUnreadCount(contact, reset) {
+      this.contacts = this.contacts.map(function (single) {
+        if (single.id != contact.id) {
+          return single;
+        }
+
+        if (reset) {
+          single.unread = 0;
+        } else {
+          single.unread += 1;
+        }
+
+        return single;
       });
     }
   },
@@ -90778,7 +90824,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "feed" }, [
+  return _c("div", { ref: "feed", staticClass: "feed" }, [
     _vm.contact
       ? _c(
           "ul",
@@ -90867,7 +90913,7 @@ var render = function() {
   return _c("div", { staticClass: "contacts-list" }, [
     _c(
       "ul",
-      _vm._l(_vm.contacts, function(contact, index) {
+      _vm._l(_vm.sortedContact, function(contact, index) {
         return _c(
           "li",
           {
@@ -90889,7 +90935,13 @@ var render = function() {
             _c("div", { staticClass: "contact" }, [
               _c("p", { staticClass: "name" }, [_vm._v(_vm._s(contact.name))]),
               _vm._v(" "),
-              _c("p", { staticClass: "email" }, [_vm._v(_vm._s(contact.email))])
+              _c("p", { staticClass: "email" }, [
+                _vm._v(_vm._s(contact.email))
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "unread" }, [
+                _vm._v(_vm._s(contact.unread))
+              ])
             ])
           ]
         )

@@ -1,13 +1,14 @@
 <template>
     <div class="contacts-list">
         <ul>
-            <li v-for="(contact,index) in contacts" :key="contact.id" @click="selectContact(index, contact)" :class="{'selected' : index === selected }">
+            <li v-for="(contact,index) in sortedContact" :key="contact.id" @click="selectContact(index, contact)" :class="{'selected' : index === selected }">
                 <div class="avatar-image">
                     <img :src="contact.profile_image" :alt="contact.name">
                 </div>
                 <div class="contact">
                     <p class="name">{{contact.name}}</p>
                     <p class="email">{{contact.email}}</p>
+                    <span class="unread">{{contact.unread}}</span>
                 </div>
             </li>
         </ul>
@@ -33,6 +34,13 @@
                 console.log(contact);
                 this.selected = index;
                 this.$emit('selected',contact);
+            }
+        },
+        computed:{
+            sortedContact(){
+                return _.sortBy(this.contacts,[(contact) =>{
+                    return contact.unread;
+                }]).reverse();
             }
         }
     }

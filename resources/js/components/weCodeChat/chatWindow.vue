@@ -29,12 +29,11 @@
                   alert('Choose contact');
                   return 0;
               }
-              console.log(this.contact);
             axios.post('/chat/send',{
                 contact_id : this.contact.id,
                 text : text
             }).then(response =>{
-                this.$emit('pushMes',response.data);
+                this.$emit('pushMes',response);
             });
           },
         },

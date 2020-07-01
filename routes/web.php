@@ -53,6 +53,7 @@ Route::group(['prefix'=>'chat','as'=>'chat.'],function (){
     Route::get('/','ChatController@index')->name('index');
     Route::get('/messages/{id}','ChatController@messages')->name('messages');
     Route::post('/send','ChatController@send')->name('send');
+    Route::get('contacts','ChatController@contacts')->name('contacts');
 });
 
 Route::get('/users','VueController@getUsers')->name('users');

@@ -17,3 +17,6 @@ Broadcast::channel('room.{room_id}', function ($user, $room_id) {
     return $user->rooms->contains($room_id);
 //    return true;
 });
+Broadcast::channel('channel-chat.{id}', function ($user, $id) {
+    return $user->id = $id;
+});
