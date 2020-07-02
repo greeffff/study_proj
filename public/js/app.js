@@ -3032,7 +3032,7 @@ __webpack_require__.r(__webpack_exports__);
         contact_id: this.contact.id,
         text: text
       }).then(function (response) {
-        _this.$emit('pushMes', response);
+        _this.$emit('pushMes', response.data);
       });
     }
   },
@@ -3173,10 +3173,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     handleIncoming: function handleIncoming(message) {
       if (this.selectContact && message.from === this.selectContact.id) {
-        this.pushNewMessage(message.text);
-      }
+        this.pushNewMessage(message);
+      } // console.log(message);
 
-      this.updateUnreadCount(message, false);
+
+      this.updateUnreadCount(message.from_user, false);
     },
     updateUnreadCount: function updateUnreadCount(contact, reset) {
       this.contacts = this.contacts.map(function (single) {

@@ -27,6 +27,7 @@ class ChatController extends Controller
         return response()->json($contacts);
     }
     public function messages($id){
+        Message::where('from', $id)->orWhere('to',Auth::user()->id)->update(['unread'=>1]);
         $messages = Message::where('from', $id)->orWhere('to',$id)->get();
         return $messages;
     }

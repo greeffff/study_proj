@@ -58,9 +58,10 @@
             },
             handleIncoming(message){
                 if(this.selectContact && message.from === this.selectContact.id){
-                    this.pushNewMessage(message.text);
+                    this.pushNewMessage(message);
                 }
-                this.updateUnreadCount(message, false);
+                // console.log(message);
+                this.updateUnreadCount(message.from_user, false);
             },
             updateUnreadCount(contact,reset){
                 this.contacts = this.contacts.map((single)=>{

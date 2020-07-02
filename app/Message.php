@@ -8,6 +8,6 @@ class Message extends Model
 {
     protected $guarded = [];
     public function fromUser(){
-        return $this->hasOne('App\Message','from');
+        return $this->hasOne('App\Message','id','from');
     }
 }

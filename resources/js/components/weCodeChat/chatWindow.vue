@@ -33,7 +33,7 @@
                 contact_id : this.contact.id,
                 text : text
             }).then(response =>{
-                this.$emit('pushMes',response);
+                this.$emit('pushMes',response.data);
             });
           },
         },

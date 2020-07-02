@@ -34,9 +34,9 @@ class EventMessager implements ShouldBroadcast
     {
         return new PrivateChannel('channel-chat.'.$this->body->to);
     }
-//    public function broadcastWith(){
+    public function broadcastWith(){
 
-//        $this->body->load('fromContact');
-//        return ['message'=>$this->body->message];
-//    }
+        $this->body->load('fromUser');
+        return ['body'=>$this->body];
+    }
 }
